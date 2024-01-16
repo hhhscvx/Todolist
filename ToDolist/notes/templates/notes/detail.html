@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ note.title }}{% endblock %}
+
+{% block content %}
+  <div class="main">
+    <div class="note">
+        <h2 id="title" style="border-bottom:2px solid black;">{{ note.title }}</h2>
+        <p id="desc" style="border-bottom:2px solid black; margin-top: 15px; margin-bottom: 15px;">{{ note.description }}</p>
+        {% if note.status  == 'Не сделано' %}
+          <p style="color: gray; font-style: italic; display: inline-block; vertical-align: middle; margin-right: 10px;">Статус: {{ note.status }}</p>
+          <button style="display: inline-block; vertical-align: middle; margin-bottom: 10px;" type="button" class="btn btn-outline-info" onclick="window.location.href='#'">Выполнено</button>
+        {% endif %}
+    </div>
+  </div>
+{% endblock content %}
