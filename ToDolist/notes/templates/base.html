@@ -39,18 +39,21 @@
               <a class="nav-link active" aria-current="page" href="{% url 'notes:list_view' %}">Мои заметки</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Добавить заметку</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'notes:list_today_view' %}">Сегодня</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'notes:create_view' %}">Добавить заметку</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
             <input
               class="form-control me-2"
               type="search"
-              placeholder="Search"
+              placeholder="Поиск"
               aria-label="Search"
             />
             <button class="btn btn-outline-success" type="submit">
-              Search
+              Поиск
             </button>
           </form>
         </div>

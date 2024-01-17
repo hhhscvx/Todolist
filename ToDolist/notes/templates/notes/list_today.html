@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Заметки{% endblock %}
+{% block title %}Заметки на сегодня{% endblock %}
 
-{% block content %} 
-  <h2 style="text-align: center;">Мои заметки</h2>
-  {% for note in all_notes %}
+{% block content %}
+  <h2 style="text-align: center;">Заметки на сегодня</h2>
+  {% for note in today_notes %}
     <div style="display: flex; justify-content: center; align-items: center;">
       <div class="card" style="width: 18rem; display: flex; justify-content: center; align-items: center; margin: 10px;">
           <div class="card-body">
