@@ -15,3 +15,10 @@
 h2 {
     border-bottom:1px solid #bbb;
 }
+.log_link {
+    text-decoration: none;
+    color: #d8c3ce;
+}
+.ah2 {
+    margin-left: 15px;
+}

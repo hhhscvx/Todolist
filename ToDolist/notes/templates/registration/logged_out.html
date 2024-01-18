@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Выход{% endblock %}
+
+{% block content %}
+  <h2 class="ah2">Выход из аккаунта.</h2>
+  <p class="ah2">
+    Успешный выход.
+    <a href="{% url 'notes:login' %}">Войти снова</a>
+  </p>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация{% endblock title %}
+
+{% block content %}
+  <h2 class="ah2">Регистрация</h2>
+  <form action="{% url 'notes:register' %}" method="post" class="ah2">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-outline-dark" type="submit" value="Создать">
+  </form>  
+{% endblock content %}

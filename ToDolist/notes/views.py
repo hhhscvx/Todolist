@@ -4,6 +4,9 @@ from .forms import NoteForm
 from datetime import date
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
 
 
 def list_view(request):
@@ -38,3 +41,19 @@ def note_create_view(request):
         note = NoteForm()
 
     return render(request, 'notes/create.html', {'note': note})
+
+
+def register_view(request):
+    if request.method == 'POST':
+        reg = UserCreationForm(request.POST)
+        if reg.is_valid():
+            reg.save()
+            cd = reg.cleaned_data
+            username = cd['username']
+            password = cd['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('notes:list_view')
+    else:
+        reg = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': reg})

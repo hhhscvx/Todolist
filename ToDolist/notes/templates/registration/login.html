@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Вход в аккаунт{% endblock title %}
+
+{% block content %}
+  <h2 class="ah2">Вход</h2>
+  <form action="{% url 'notes:login' %}" method="post" class="ah2">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-outline-dark" type="submit" value="Войти">
+  </form>
+{% endblock content %}
