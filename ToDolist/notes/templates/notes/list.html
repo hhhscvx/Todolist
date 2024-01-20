@@ -14,5 +14,7 @@
           </div>
       </div>
     </div>
+  {% empty %}
+    <h5 class="ah2">У вас пока нет заметок, вы можете <a href="{% url 'notes:create_view' %}">создать</a> свою первую заметку</h5>
   {% endfor %}  
 {% endblock content %}

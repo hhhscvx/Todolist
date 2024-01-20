@@ -4,14 +4,14 @@ from django.contrib.auth.models import User
 
 class Note(models.Model):
     STATUS_CHOICES = [
-        ('Не сделано', 'To-Do'),
-        ('Сделано', 'Completed'),
+        ('ToDo', 'Не сделано'),
+        ('Completed', 'Сделано'),
     ]
     title = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     datetodo = models.DateField()
     status = models.CharField(
-        max_length=20, choices=STATUS_CHOICES, default='todo')
+        max_length=20, choices=STATUS_CHOICES, default='ToDo')
     description = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,

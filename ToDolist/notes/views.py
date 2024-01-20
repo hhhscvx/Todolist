@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 
 def list_view(request):
-    all_notes = Note.objects.all().order_by('-datetodo')
+    all_notes = Note.objects.filter(user=request.user).order_by('-datetodo')
     return render(request, 'notes/list.html', {'all_notes': all_notes})
 
 
@@ -20,7 +20,7 @@ def detail_view(request, note_id):
 
 
 def list_today_view(request):
-    today_notes = Note.objects.filter(datetodo=date.today())
+    today_notes = Note.objects.filter(datetodo=date.today(), user=request.user)
     return render(request, 'notes/list_today.html', {'today_notes': today_notes})
 
 
