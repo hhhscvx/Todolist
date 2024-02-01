@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from notes.api.views import NoteAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('notes/', include('notes.urls', namespace='notes')),
+    path('api/v1/notelist', NoteAPIView.as_view())
 ]

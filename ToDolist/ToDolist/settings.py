@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,8 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '05081992',
         'HOST': 'localhost',  # Replace with your PostgreSQL server's address if necessary
-        'PORT': '',          # Leave empty to use the default PostgreSQL port (usually 5432)
+        # Leave empty to use the default PostgreSQL port (usually 5432)
+        'PORT': '',
     }
 }
 
