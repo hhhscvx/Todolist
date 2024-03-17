@@ -10,15 +10,21 @@
           {% for note in all_notes %}
           <li class="note">
             {% if note.status == 'ToDo' %}
-              <label class="custom-checkbox">
-                <input type="checkbox" class="checkbox-input" onclick="location.href = '{% url 'notes:change-task-status' note.id "Completed" %}'">
-              </label>
-              <span>{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span>
+              <div class="pretty p-image p-plain" onclick="location.href = '{% url 'notes:change-task-status' note.id "Completed" %}'">
+                <input type="checkbox" />
+                <div class="state">
+                  <img class="image" src="https://lokesh-coder.github.io/pretty-checkbox/img/checked/004.png">
+                  <label><span>{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
+                </div>
+              </div>
             {% else %}
-              <label class="custom-checkbox">
-                <input type="checkbox" class="checkbox-input" onclick="location.href = '{% url 'notes:change-task-status' note.id "ToDo" %}'">
-              </label>
-              <span class="complete">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span>
+            <div class="pretty p-image p-plain" onclick="location.href = '{% url 'notes:change-task-status' note.id "ToDo" %}'">
+              <input type="checkbox" checked />
+              <div class="state">
+                <img class="image" src="https://lokesh-coder.github.io/pretty-checkbox/img/checked/004.png">
+                <label><span class="complete">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
+              </div>
+            </div>
             {% endif %}
           </li>
           {% empty %}
