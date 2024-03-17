@@ -1,0 +1,77 @@
+.note {
+  padding-bottom: 10px;
+}
+.main {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#desc {
+  max-width: 400px;
+}
+
+h2 {
+  border-bottom: 1px solid #bbb;
+}
+
+.log_link {
+  text-decoration: none;
+  color: #d8c3ce;
+}
+
+.ah2 {
+  margin-left: 15px;
+}
+
+.notes {
+  position: absolute;
+}
+
+.complete {
+  text-decoration: line-through;
+  color: gray;
+  font-style: italic;
+}
+
+.ul-notes {
+  padding-bottom: 10px;
+  list-style-type: none;
+}
+
+.center {
+  text-align: center;
+}
+
+/* checkbox */
+/* Скрытый оригинальный чекбокс */
+.checkbox-input {
+  display: none;
+}
+
+/* Стилизация пользовательского чекбокса */
+.custom-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 15px; /* Ширина кастомного чекбокса */
+  height: 15px; /* Высота кастомного чекбокса */
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%; /* Делаем круглым */
+}
+
+/* Стилизация галочки */
+.custom-checkbox::after {
+  content: '\2713'; /* Галочка (Unicode) */
+  font-size: 20px; /* Размер галочки */
+  color: transparent; /* По умолчанию галочка скрыта */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* При отмеченном чекбоксе, отображаем галочку */
+.custom-checkbox input:checked + .custom-checkbox::after {
+  color: #007bff; /* Цвет галочки при отмечении */
+}
+/* */

@@ -6,19 +6,28 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
 
 
+def change_task_status(request, pk, status):
+    note = Note.objects.get(pk=pk)
+    note.status = str(status)
+    note.save()
+    return redirect('notes:list_view')
+
+
+@login_required
 def list_view(request):
     all_notes = Note.objects.filter(user=request.user).order_by('-datetodo')
     return render(request, 'notes/list.html', {'all_notes': all_notes})
 
 
+@login_required
 def detail_view(request, note_id):
     note = get_object_or_404(Note, id=note_id)
     return render(request, 'notes/detail.html', {'note': note})
 
 
+@login_required
 def list_today_view(request):
     today_notes = Note.objects.filter(datetodo=date.today(), user=request.user)
     return render(request, 'notes/list_today.html', {'today_notes': today_notes})

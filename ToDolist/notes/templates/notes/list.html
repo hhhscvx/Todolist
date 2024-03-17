@@ -1,20 +1,43 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Заметки{% endblock %}
+{% block title %}Заметки{% endblock %} <!-- У меня есть: "{% url 'notes:detail_view' note.id %}" -->
 
-{% block content %} 
-  <h2 style="text-align: center;">Мои заметки</h2>
-  {% for note in all_notes %}
-    <div style="display: flex; justify-content: center; align-items: center;">
-      <div class="card" style="width: 18rem; display: flex; justify-content: center; align-items: center; margin: 10px;">
-          <div class="card-body">
-          <h5 class="card-title">{{ note.title }}</h5>
-          <p class="card-text">Сделать до: {{ note.datetodo }}</p>
-          <a href="{% url 'notes:detail_view' note.id %}" class="btn btn-primary">Подробнее</a>
-          </div>
-      </div>
+{% block content %}
+  <h2 class="center">Мои заметки</h2>
+    <div class="notes">
+        <ul class="ul-notes">
+          {% for note in all_notes %}
+          <li class="note">
+            {% if note.status == 'ToDo' %}
+              <label class="custom-checkbox">
+                <input type="checkbox" class="checkbox-input" onclick="location.href = '{% url 'notes:change-task-status' note.id "Completed" %}'">
+              </label>
+              <span>{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span>
+            {% else %}
+              <label class="custom-checkbox">
+                <input type="checkbox" class="checkbox-input" onclick="location.href = '{% url 'notes:change-task-status' note.id "ToDo" %}'">
+              </label>
+              <span class="complete">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span>
+            {% endif %}
+          </li>
+          {% empty %}
+        </ul>
     </div>
-  {% empty %}
     <h5 class="ah2">У вас пока нет заметок, вы можете <a href="{% url 'notes:create_view' %}">создать</a> свою первую заметку</h5>
   {% endfor %}  
 {% endblock content %}
+{% block domready %}
+  let notes = document.querySelector('.notes');
+  notes.style.left = document.body.offsetWidth / 2 - notes.offsetWidth / 2 + 'px';
+  notes.addEventListener('click', event => {
+    if (event.target.nodeName == 'LI') {
+      alert('NOTE')
+    }
+    console.log(event.target)
+  })
+
+  let ul = document.querySelector('.ul-notes');
+  let checkbox = document.querySelector('checkbox-input');
+
+{% endblock domready %}

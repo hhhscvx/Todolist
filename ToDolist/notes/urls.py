@@ -10,4 +10,6 @@ urlpatterns = [
     path('create/', views.note_create_view, name='create_view'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', views.register_view, name='register'),
+    path('status/<int:pk>/<str:status>/',
+         views.change_task_status, name="change-task-status")
 ]
