@@ -7,6 +7,7 @@ class Note(models.Model):
         ('ToDo', 'Не сделано'),
         ('Completed', 'Сделано'),
     ]
+    id = models.AutoField(primary_key=True, db_index=True)
     title = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     datetodo = models.DateField()

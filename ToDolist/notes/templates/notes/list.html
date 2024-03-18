@@ -10,19 +10,19 @@
           {% for note in all_notes %}
           <li class="note">
             {% if note.status == 'ToDo' %}
-              <div class="pretty p-image p-plain" onclick="location.href = '{% url 'notes:change-task-status' note.id "Completed" %}'">
-                <input type="checkbox" />
+              <div class="pretty p-image p-round">
+                <input type="checkbox" data-note-id="{{ note.id }}" />
                 <div class="state">
                   <img class="image" src="https://lokesh-coder.github.io/pretty-checkbox/img/checked/004.png">
-                  <label><span>{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
+                  <label><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
                 </div>
               </div>
             {% else %}
-            <div class="pretty p-image p-plain" onclick="location.href = '{% url 'notes:change-task-status' note.id "ToDo" %}'">
-              <input type="checkbox" checked />
+            <div class="pretty p-image p-plain">
+              <input data-note-id="{{ note.id }}" type="checkbox" checked />
               <div class="state">
                 <img class="image" src="https://lokesh-coder.github.io/pretty-checkbox/img/checked/004.png">
-                <label><span class="complete">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
+                <label class="complete"><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
               </div>
             </div>
             {% endif %}
@@ -36,14 +36,67 @@
 {% block domready %}
   let notes = document.querySelector('.notes');
   notes.style.left = document.body.offsetWidth / 2 - notes.offsetWidth / 2 + 'px';
-  notes.addEventListener('click', event => {
-    if (event.target.nodeName == 'LI') {
-      alert('NOTE')
-    }
-    console.log(event.target)
-  })
 
   let ul = document.querySelector('.ul-notes');
-  let checkbox = document.querySelector('checkbox-input');
+  let listItems = Array.from(document.querySelectorAll('ul li'));
+  let checkboxes = document.querySelectorAll('[data-note-id]');
+
+  document.body.addEventListener('mousedown', event => {
+    let target = event.target;
+    console.log(target);
+  })
+
+  checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener('change', function(event) {
+          let noteId = checkbox.dataset.noteId;
+          let status = checkbox.checked ? 'Completed' : 'ToDo';
+          fetch(`/notes/status/${noteId}/${status}/`, {
+              method: 'POST',
+              headers: {
+                  'X-CSRFToken': getCookie('csrftoken'), // добавляем CSRF-токен
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({}) // пустое тело запроса, так как данные передаются в URL
+          }).then(response => {
+              if (response.ok) {
+                console.log('Статус заметки успешно изменен');
+              } else {
+                  console.error('Ошибка при изменении статуса заметки');
+              }
+          }).catch(error => {
+              console.error('Произошла ошибка:', error);
+          });
+          let noteTitle = event.currentTarget.nextElementSibling.lastElementChild;
+          noteTitle.classList.toggle('complete');
+      });
+  });
+
+// Функция для получения CSRF-токена из куки
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.startsWith(name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+
+  // for (let checkbox of checkboxes) {
+  //   checkbox.addEventListener('click', event => {
+  //   let target = event.target;
+  //   let li = target.closest('li');
+  //   if (!li) {
+  //     alert('li не найдено, break');
+  //   }
+  //   let curr_li_position = listItems.indexOf(li);
+  //   ul.append(li);
+  // })
+  // }
 
 {% endblock domready %}
