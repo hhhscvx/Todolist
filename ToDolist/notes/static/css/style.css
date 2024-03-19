@@ -75,3 +75,17 @@ h2 {
   color: #007bff; /* Цвет галочки при отмечении */
 }
 /* */
+
+/* поля в форме создания заметки */
+input[type="text"], input[type="date"], input[type="password"], textarea {
+  border-radius: 5px; /* Задает закругленные углы */
+  margin-left: 5px;
+}
+
+.fa-pen-to-square {
+  cursor: pointer;
+}
+
+.fa-trash-can {
+  cursor: pointer;
+}

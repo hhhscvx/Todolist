@@ -8,6 +8,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
 
+def note_delete(request, pk):
+    note = Note.objects.get(pk=pk)
+    note.delete()
+    return redirect('notes:list_view')
+
+
 def change_task_status(request, pk, status):
     note = Note.objects.get(pk=pk)
     note.status = str(status)

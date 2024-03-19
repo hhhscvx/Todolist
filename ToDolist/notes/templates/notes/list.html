@@ -13,90 +13,29 @@
               <div class="pretty p-image p-round">
                 <input type="checkbox" data-note-id="{{ note.id }}" />
                 <div class="state">
-                  <img class="image" src="https://lokesh-coder.github.io/pretty-checkbox/img/checked/004.png">
+                  <img class="image" src="{% static 'img/checked.png' %}">
                   <label><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
                 </div>
               </div>
+              <i class="fa-regular fa-pen-to-square" data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка редактирования -->
+              <i class="fa-regular fa-trash-can" data-note-id="{{ note.id }}" style="cursor: pointer;" onmouseenter="event.target.style.background='red'" onmouseleave="event.target.style.background=''"></i> <!-- Иконка удаления -->
             {% else %}
-            <div class="pretty p-image p-plain">
+            <div class="pretty p-image p-round">
               <input data-note-id="{{ note.id }}" type="checkbox" checked />
               <div class="state">
-                <img class="image" src="https://lokesh-coder.github.io/pretty-checkbox/img/checked/004.png">
+                <img class="image" src="{% static 'img/checked.png' %}">
                 <label class="complete"><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
               </div>
             </div>
+            <i class="fa-regular fa-pen-to-square" data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка редактирования -->
+            <i class="fa-regular fa-trash-can" data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка удаления -->
             {% endif %}
           </li>
           {% empty %}
         </ul>
     </div>
     <h5 class="ah2">У вас пока нет заметок, вы можете <a href="{% url 'notes:create_view' %}">создать</a> свою первую заметку</h5>
-  {% endfor %}  
-{% endblock content %}
-{% block domready %}
-  let notes = document.querySelector('.notes');
-  notes.style.left = document.body.offsetWidth / 2 - notes.offsetWidth / 2 + 'px';
-
-  let ul = document.querySelector('.ul-notes');
-  let listItems = Array.from(document.querySelectorAll('ul li'));
-  let checkboxes = document.querySelectorAll('[data-note-id]');
-
-  document.body.addEventListener('mousedown', event => {
-    let target = event.target;
-    console.log(target);
-  })
-
-  checkboxes.forEach(function(checkbox) {
-      checkbox.addEventListener('change', function(event) {
-          let noteId = checkbox.dataset.noteId;
-          let status = checkbox.checked ? 'Completed' : 'ToDo';
-          fetch(`/notes/status/${noteId}/${status}/`, {
-              method: 'POST',
-              headers: {
-                  'X-CSRFToken': getCookie('csrftoken'), // добавляем CSRF-токен
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({}) // пустое тело запроса, так как данные передаются в URL
-          }).then(response => {
-              if (response.ok) {
-                console.log('Статус заметки успешно изменен');
-              } else {
-                  console.error('Ошибка при изменении статуса заметки');
-              }
-          }).catch(error => {
-              console.error('Произошла ошибка:', error);
-          });
-          let noteTitle = event.currentTarget.nextElementSibling.lastElementChild;
-          noteTitle.classList.toggle('complete');
-      });
-  });
-
-// Функция для получения CSRF-токена из куки
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          if (cookie.startsWith(name + '=')) {
-              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-              break;
-          }
-      }
-  }
-  return cookieValue;
-}
-
-  // for (let checkbox of checkboxes) {
-  //   checkbox.addEventListener('click', event => {
-  //   let target = event.target;
-  //   let li = target.closest('li');
-  //   if (!li) {
-  //     alert('li не найдено, break');
-  //   }
-  //   let curr_li_position = listItems.indexOf(li);
-  //   ul.append(li);
-  // })
-  // }
-
-{% endblock domready %}
+  {% endfor %}
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/edit&delete.js' %}"></script>
+  {% endblock content %}
