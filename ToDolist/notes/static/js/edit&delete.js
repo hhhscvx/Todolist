@@ -2,36 +2,60 @@ document.addEventListener("DOMContentLoaded", (event) => {
   let edit = document.querySelectorAll(".fa-pen-to-square"); // также реализовать подсвечивание при наведении и cursor: pointer
   let del = document.querySelectorAll(".fa-trash-can");
   let listItems = document.querySelectorAll(".ul-notes li");
-  
 
   Array.from(del).forEach((el) => {
     el.addEventListener("click", (event) => {
       let noteId = el.dataset.noteId;
       let note = document.querySelector(`[data-note-id="${noteId}"]`);
-      fetch(`delete/${noteId}`, {
-        method: "DELETE",
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            console.log("Заметка успешно удалена");
-            console.log(`note: ${note}`);
-            note.closest('li').hidden = true;
-          } else {
-            console.log("Произошла ошибка, заметка не удалена");
-          }
+      let conf = confirm(
+        `Удалить заметку ${note.nextElementSibling.lastElementChild.firstElementChild.innerHTML}?`
+      );
+      if (conf === true) {
+        fetch(`delete/${noteId}`, {
+          method: "DELETE",
+          headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+          },
         })
-        .catch((error) => {
-          console.error("Error deleting note:", error);
-        });
+          .then((response) => {
+            if (response.ok) {
+              console.log("Заметка успешно удалена");
+              console.log(`note: ${note}`);
+              note.closest("li").hidden = true;
+            } else {
+              console.log("Произошла ошибка, заметка не удалена");
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting note:", error);
+          });
+      } else {
+        console.log("Заявка на удаление отклонена");
+      }
     });
   });
 
   Array.from(edit).forEach((el) => {
     el.addEventListener("click", (event) => {
       console.log(el.dataset.noteId);
+    });
+  });
+
+  Array.from(del).forEach((el) => {
+    el.addEventListener("mouseenter", (event) => {
+      el.style.background = "red";
+      el.addEventListener("mouseleave", (event) => {
+        el.style.background = "";
+      });
+    });
+  });
+
+  Array.from(edit).forEach((el) => {
+    el.addEventListener("mouseenter", (event) => {
+      el.style.background = "#20c997"; // green
+      el.addEventListener("mouseleave", (event) => {
+        el.style.background = "";
+      });
     });
   });
 
@@ -49,5 +73,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
     return cookieValue;
   }
-
 });
