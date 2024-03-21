@@ -12,5 +12,6 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('status/<int:pk>/<str:status>/',
          views.change_task_status, name="change-task-status"),
-    path('delete/<int:pk>/', views.note_delete, name="note_delete")
+    path('delete/<int:pk>/', views.note_delete, name="note_delete"),
+    path('edit/<int:note_id>/', views.note_edit, name="note_edit"),
 ]

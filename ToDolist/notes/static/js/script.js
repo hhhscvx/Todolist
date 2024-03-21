@@ -68,19 +68,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       let li = target.closest("li");
       if (!li) {
-        alert("li не найдено, break");
+        alert("note not found");
       }
 
       let curr_li_position = listItems.indexOf(li);
-      console.log(`curr_li_position: ${curr_li_position}`);
+      // console.log(`curr_li_position: ${curr_li_position}`);
       if (checkbox.checked) {
         ul.append(li);
       } else {
         if (curr_li_position == 0) {
           ul.prepend(li);
         } else {
-          console.log(`checkboxesChecked: ${checkboxesChecked}`);
-          console.log(`curr_li_postition: ${curr_li_position}`);
+          // console.log(`checkboxesChecked: ${checkboxesChecked}`);
+          // console.log(`curr_li_postition: ${curr_li_position}`);
           listItems[curr_li_position - 1].insertAdjacentElement("afterend", li);
           Array.from(checkboxes).forEach((cbox) => {
             if (cbox.checked) ul.append(cbox.closest("li"));

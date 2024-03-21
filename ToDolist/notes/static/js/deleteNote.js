@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   let edit = document.querySelectorAll(".fa-pen-to-square"); // также реализовать подсвечивание при наведении и cursor: pointer
   let del = document.querySelectorAll(".fa-trash-can");
-  let listItems = document.querySelectorAll(".ul-notes li");
 
   Array.from(del).forEach((el) => {
     el.addEventListener("click", (event) => {
@@ -35,24 +34,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   });
 
-  Array.from(edit).forEach((el) => {
-    el.addEventListener("click", (event) => {
-      console.log(el.dataset.noteId);
-    });
-  });
+  // Array.from(edit).forEach((el) => {
+  //   el.addEventListener("click", (event) => {
+  //     console.log(el.dataset.noteId);
+  //   });
+  // });
 
   Array.from(del).forEach((el) => {
     el.addEventListener("mouseenter", (event) => {
       el.style.background = "red";
-      el.addEventListener("mouseleave", (event) => {
-        el.style.background = "";
-      });
-    });
-  });
-
-  Array.from(edit).forEach((el) => {
-    el.addEventListener("mouseenter", (event) => {
-      el.style.background = "#20c997"; // green
       el.addEventListener("mouseleave", (event) => {
         el.style.background = "";
       });

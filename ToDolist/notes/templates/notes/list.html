@@ -4,6 +4,18 @@
 {% block title %}Заметки{% endblock %} <!-- У меня есть: "{% url 'notes:detail_view' note.id %}" -->
 
 {% block content %}
+  <div id="prompt-form-container">
+    <form id="prompt-form">
+      <div id="prompt-title"></div>
+      <input name="text" type="text" id="new_title">
+      <div id="prompt-datetodo"></div>
+      <input name="text2" type="text" id="new_datetodo">
+      <div id="prompt-description"></div>
+      <input name="text3" type="text" id="new_description">
+      <input type="submit" class="btn btn-success" value="Сохранить">
+      <i class="fa-regular fa-rectangle-xmark"></i>
+    </form>
+  </div>
   <h2 class="center">Мои заметки</h2>
     <div class="notes">
         <ul class="ul-notes">
@@ -17,8 +29,12 @@
                   <label><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
                 </div>
               </div>
-              <i class="fa-regular fa-pen-to-square" data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка редактирования -->
-              <i class="fa-regular fa-trash-can" data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка удаления -->
+              <i class="fa-regular fa-pen-to-square" data-note-title="{{ note.title }}" 
+              data-note-datetodo="{{ note.datetodo }}" data-note-description="{{ note.description }}"
+              data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка редактирования -->
+              <i class="fa-regular fa-trash-can" data-note-title="{{ note.title }}" 
+              data-note-datetodo="{{ note.datetodo }}" data-note-description="{{ note.description }}"
+              data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка удаления -->
             {% else %}
             <div class="pretty p-image p-round">
               <input data-note-id="{{ note.id }}" type="checkbox" checked />
@@ -27,15 +43,20 @@
                 <label class="complete"><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
               </div>
             </div>
-            <i class="fa-regular fa-pen-to-square" data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка редактирования -->
-            <i class="fa-regular fa-trash-can" data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка удаления -->
+            <i class="fa-regular fa-pen-to-square" data-note-title="{{ note.title }}" 
+            data-note-datetodo="{{ note.datetodo }}" data-note-description="{{ note.description }}"
+            data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка редактирования -->
+            <i class="fa-regular fa-trash-can" data-note-title="{{ note.title }}" 
+            data-note-datetodo="{{ note.datetodo }}" data-note-description="{{ note.description }}"
+            data-note-id="{{ note.id }}" style="cursor: pointer;"></i> <!-- Иконка удаления -->
             {% endif %}
           </li>
           {% empty %}
         </ul>
     </div>
-    <h5 class="ah2">У вас пока нет заметок, вы можете <a href="{% url 'notes:create_view' %}">создать</a> свою первую заметку</h5>
+    <h5>У вас пока нет заметок, вы можете <a href="{% url 'notes:create_view' %}">создать</a> свою первую заметку</h5>
   {% endfor %}
   <script src="{% static 'js/script.js' %}"></script>
-  <script src="{% static 'js/edit&delete.js' %}"></script>
+  <script src="{% static 'js/deleteNote.js' %}"></script>
+  <script src="{% static 'js/editNote.js' %}"></script>
   {% endblock content %}
