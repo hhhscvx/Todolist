@@ -61,7 +61,7 @@ h2 {
 
 /* Стилизация галочки */
 .custom-checkbox::after {
-  content: '\2713'; /* Галочка (Unicode) */
+  content: "\2713"; /* Галочка (Unicode) */
   font-size: 20px; /* Размер галочки */
   color: transparent; /* По умолчанию галочка скрыта */
   position: absolute;
@@ -77,7 +77,10 @@ h2 {
 /* */
 
 /* поля в форме создания заметки */
-input[type="text"], input[type="date"], input[type="password"], textarea {
+input[type="text"],
+input[type="date"],
+input[type="password"],
+textarea {
   border-radius: 5px; /* Задает закругленные углы */
   margin-left: 5px;
 }
@@ -90,4 +93,8 @@ input[type="text"], input[type="date"], input[type="password"], textarea {
 .fa-trash-can {
   cursor: pointer;
   border-radius: 5px;
+}
+
+.overdue {
+  color: rgba(255, 0, 0, 0.9);
 }

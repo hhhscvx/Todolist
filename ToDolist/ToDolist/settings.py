@@ -207,3 +207,6 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+# По сути еще дорабатывать можно много что, но основная работа сделана, знания
+# применены на практике и основной функционал работает более чем корректно и удовлетворяюще

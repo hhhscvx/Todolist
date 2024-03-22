@@ -3,6 +3,49 @@ document.addEventListener("DOMContentLoaded", (event) => {
   notes.style.left =
     document.body.offsetWidth / 2 - notes.offsetWidth / 2 + "px";
 
+  const months = {
+    января: "01",
+    февраля: "02",
+    марта: "03",
+    апреля: "04",
+    мая: "05",
+    июня: "06",
+    июля: "07",
+    августа: "08",
+    сентября: "09",
+    октября: "10",
+    ноября: "11",
+    декабря: "12",
+  };
+
+  notes = document.querySelectorAll(".note");
+
+  notes.forEach((note) => {
+    // currDate
+    let currentDate = new Date();
+
+    let currYear = currentDate.getFullYear();
+    let currMonth = currentDate.getMonth(); // Месяцы в JavaScript начинаются с 0
+    let currDay = currentDate.getDate();
+
+    currentDate = new Date(currYear, currMonth, currDay);
+    // datetodo
+    let datetodoStr =
+      note.firstElementChild.nextElementSibling.dataset.noteDatetodo.split(" ");
+    let year = datetodoStr[2];
+    let month = months[datetodoStr[1]];
+    let day = datetodoStr[0];
+    let datetodo = new Date(
+      `${year}-${month >= 10 ? month : "0" + month}-${
+        day >= 10 ? day : "0" + day
+      }`
+    );
+
+    if (datetodo < currentDate) {
+      note.querySelector(".log_link").classList.add("overdue");
+    }
+  });
+
   let ul = document.querySelector(".ul-notes");
   let listItems = Array.from(document.querySelectorAll(".ul-notes li"));
   let checkboxes = document.querySelectorAll("[data-note-id]");
@@ -10,10 +53,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (cbox.checked) ul.append(cbox.closest("li"));
   });
 
-  document.body.addEventListener("mousedown", (event) => {
-    let target = event.target;
-    console.log(target);
-  });
+  // document.body.addEventListener("mousedown", (event) => {
+  //   let target = event.target;
+  //   console.log(target);
+  // });
 
   checkboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function (event) {

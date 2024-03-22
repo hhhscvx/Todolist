@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+  // variabes
   let edit = document.querySelectorAll(".fa-pen-to-square");
   let cancel = document.querySelector(".fa-rectangle-xmark");
+
+  // mouseenter backgrounds
   cancel.addEventListener("mouseenter", (event) => {
     cancel.style.background = "#555555";
     cancel.addEventListener("mouseleave", (event) => {
@@ -15,7 +18,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   });
 
-  // mouseenter background
   Array.from(edit).forEach((el) => {
     el.addEventListener("mouseenter", (event) => {
       el.style.background = "#20c997"; // green
@@ -25,34 +27,28 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   });
 
+  // main func
   Array.from(edit).forEach((el) => {
     el.addEventListener("click", (event) => {
       showPrompt(
         el.dataset.noteTitle,
         el.dataset.noteDatetodo,
         el.dataset.noteDescription,
+        // function on click to edit
         function (noteTitle, noteDatetodo, noteDescription) {
           console.log(
             `Вы ввели: ${noteTitle} и ${noteDatetodo} и ${noteDescription}`
           );
           console.log(`typeof noteTitle: ${typeof noteTitle}`);
           const data = {
-            new_title: String(noteTitle),
+            new_title: noteTitle,
             new_datetodo: noteDatetodo,
-            new_description: String(noteDescription),
+            new_description: noteDescription,
           };
           let currEl =
             el.previousElementSibling.lastElementChild.lastElementChild
               .firstElementChild;
           currEl.textContent = noteTitle;
-          currEl.nextElementSibling.textContent = `Сделать до ${noteDatetodo}`;
-          var form = document.getElementById("prompt-form");
-          form.elements.text.value = currEl.textContent;
-          form.elements.text2.value = noteDatetodo;
-          form.elements.text3.value = noteDescription;
-          console.log(
-            `currEl.nextElementSibling: ${currEl.nextElementSibling.textContent}`
-          );
           fetch(`edit/${el.dataset.noteId}/`, {
             method: "POST",
             headers: {
@@ -64,10 +60,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
             .then((response) => {
               if (response.ok) {
                 console.log("Запрос успешно выполнен");
+                currEl.nextElementSibling.firstElementChild.textContent = `Сделать до ${noteDatetodo}`;
               } else {
-                console.error(
-                  "Ошибка выполнения запроса, статус: " + response.status
-                );
+                alert("Введена некорректная дата, попробуйте еще раз");
               }
             })
             .catch((error) => {

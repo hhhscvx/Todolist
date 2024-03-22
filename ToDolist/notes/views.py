@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Note
 from .forms import NoteForm
-from datetime import date
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -27,18 +26,21 @@ def note_edit(request, note_id):
     }
     note = get_object_or_404(Note, id=note_id)
     if request.method == "POST":
+        # post data
         json_data = json.loads(request.body)
         new_title = json_data.get("new_title")
         new_datetodo_str = json_data.get("new_datetodo")
         new_description = json_data.get("new_description")
+        # set data
         if new_title:
             note.title = str(new_title)
             note.save()
         if new_datetodo_str:
             try:
+                # set correct date
                 new_datetodo_str = new_datetodo_str.split(' ')
                 day = new_datetodo_str[0]
-                month = months[new_datetodo_str[1]]
+                month = months[(new_datetodo_str[1]).lower()]
                 year = new_datetodo_str[2]
                 new_datetodo = f'{year}-{month}-{day}'
                 note.datetodo = new_datetodo
@@ -69,21 +71,9 @@ def change_task_status(request, pk, status):
 
 @login_required
 def list_view(request):
-    # по идеи должно быть datetodo без -, но я пока так оставлю, привычнее
+    # по идеи должно быть datetodo без -, но мне так больше нравится
     all_notes = Note.objects.filter(user=request.user).order_by('-datetodo')
     return render(request, 'notes/list.html', {'all_notes': all_notes})
-
-
-@login_required
-def detail_view(request, note_id):
-    note = get_object_or_404(Note, id=note_id)
-    return render(request, 'notes/detail.html', {'note': note})
-
-
-@login_required
-def list_today_view(request):
-    today_notes = Note.objects.filter(datetodo=date.today(), user=request.user)
-    return render(request, 'notes/list_today.html', {'today_notes': today_notes})
 
 
 @login_required

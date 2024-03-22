@@ -43,7 +43,10 @@
               <a class="nav-link active" aria-current="page" href="{% url 'notes:list_view' %}">Мои заметки</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'notes:list_today_view' %}">Сегодня</a>
+              <span class="nav-link active" aria-current="page" style="cursor: pointer;" id="daily">Сегодня</span>
+            </li>
+            <li class="nav-item">
+              <span class="nav-link active" aria-current="page" style="cursor: pointer;" id="weekly">На неделю</span>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="{% url 'notes:create_view' %}">Добавить заметку</a>

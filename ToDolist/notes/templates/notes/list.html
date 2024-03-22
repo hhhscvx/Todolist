@@ -26,7 +26,7 @@
                 <input type="checkbox" data-note-id="{{ note.id }}" />
                 <div class="state">
                   <img class="image" src="{% static 'img/checked.png' %}">
-                  <label><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
+                  <label><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i class="datetodo">Сделать до {{ note.datetodo }}</i> </span></label>
                 </div>
               </div>
               <i class="fa-regular fa-pen-to-square" data-note-title="{{ note.title }}" 
@@ -40,7 +40,7 @@
               <input data-note-id="{{ note.id }}" type="checkbox" checked />
               <div class="state">
                 <img class="image" src="{% static 'img/checked.png' %}">
-                <label class="complete"><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i>Сделать до {{ note.datetodo }}</i> </span></label>
+                <label class="complete"><span class="note-title">{{ note.title }}</span> <span class="log_link"> <i class="datetodo">Сделать до {{ note.datetodo }}</i> </span></label>
               </div>
             </div>
             <i class="fa-regular fa-pen-to-square" data-note-title="{{ note.title }}" 
@@ -59,4 +59,5 @@
   <script src="{% static 'js/script.js' %}"></script>
   <script src="{% static 'js/deleteNote.js' %}"></script>
   <script src="{% static 'js/editNote.js' %}"></script>
+  <script src="{% static 'js/filtering.js' %}"></script>
   {% endblock content %}
