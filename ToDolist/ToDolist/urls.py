@@ -26,6 +26,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenObtainPairV
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('notes/', include('notes.urls', namespace='notes')),
+
+    # drf
     path('api/v1/drf-auth/', include('rest_framework.urls')),
     path('api/v1/note/', views.NoteAPIList.as_view()),
     path('api/v1/note/<int:pk>/', views.NoteAPIUpdate.as_view()),

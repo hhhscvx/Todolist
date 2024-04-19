@@ -7,23 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 import json
+from django.conf import settings
 
 
 def note_edit(request, note_id):
-    months = {
-        'января': '01',
-        'февраля': '02',
-        'марта': '03',
-        'апреля': '04',
-        'мая': '05',
-        'июня': '06',
-        'июля': '07',
-        'августа': '08',
-        'сентября': '09',
-        'октября': '10',
-        'ноября': '11',
-        'декабря': '12',
-    }
     note = get_object_or_404(Note, id=note_id)
     if request.method == "POST":
         # post data
@@ -40,7 +27,7 @@ def note_edit(request, note_id):
                 # set correct date
                 new_datetodo_str = new_datetodo_str.split(' ')
                 day = new_datetodo_str[0]
-                month = months[(new_datetodo_str[1]).lower()]
+                month = settings.MONTHS[(new_datetodo_str[1]).lower()]
                 year = new_datetodo_str[2]
                 new_datetodo = f'{year}-{month}-{day}'
                 note.datetodo = new_datetodo

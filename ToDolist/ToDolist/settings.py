@@ -147,7 +147,8 @@ LOGIN_URL = 'notes:login'
 LOGOUT_URL = 'notes:logout'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',  # класс пагинации (встроен в drf)
+    # класс пагинации (встроен в drf)
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 3,  # кол-во записей на страницу
 
     'DEFAULT_RENDERER_CLASSES': [
@@ -184,7 +185,8 @@ SIMPLE_JWT = {
     "JWK_URL": None,
     "LEEWAY": 0,
 
-    "AUTH_HEADER_TYPES": ("Bearer", "piderast"),  # в постман передаем <AUTH_HEADER_TYPES (from settings.py)> <jwt_token>
+    # в постман передаем <AUTH_HEADER_TYPES (from settings.py)> <jwt_token>
+    "AUTH_HEADER_TYPES": ("Bearer", "piderast"),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",  # поле id будет названо как user_id
@@ -208,5 +210,17 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
-# По сути еще дорабатывать можно много что, но основная работа сделана, знания
-# применены на практике и основной функционал работает более чем корректно и удовлетворяюще
+MONTHS = {
+    'января': '01',
+    'февраля': '02',
+    'марта': '03',
+    'апреля': '04',
+    'мая': '05',
+    'июня': '06',
+    'июля': '07',
+    'августа': '08',
+    'сентября': '09',
+    'октября': '10',
+    'ноября': '11',
+    'декабря': '12',
+}
