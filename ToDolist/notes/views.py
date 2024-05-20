@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 import json
 from django.conf import settings
+from django.core.cache import cache
 
 
 def note_edit(request, note_id):
@@ -58,8 +59,11 @@ def change_task_status(request, pk, status):
 
 @login_required
 def list_view(request):
-    # по идеи должно быть datetodo без -, но мне так больше нравится
-    all_notes = Note.objects.filter(user=request.user).order_by('-datetodo')
+    if cache.get('all_notes'):
+        all_notes = cache.get('all_notes')
+    else:
+        all_notes = Note.objects.filter(user=request.user).order_by('-datetodo')
+        cache.set('all_notes', all_notes, 10)
     return render(request, 'notes/list.html', {'all_notes': all_notes})
 
 
