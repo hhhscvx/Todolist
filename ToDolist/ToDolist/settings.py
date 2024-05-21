@@ -237,3 +237,5 @@ CACHES = {
         "LOCATION": "redis://127.0.0.1:6379",
     }
 }
+
+NOTES_CACHE_NAME = 'all_notes'
