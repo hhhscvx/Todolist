@@ -1,12 +1,24 @@
 {% extends "base.html" %}
+{% load static%}
 
 {% block title %}Регистрация{% endblock title %}
 
 {% block content %}
-  <h2 class="ah2">Регистрация</h2>
-  <form action="{% url 'notes:register' %}" method="post" class="ah2">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input class="btn btn-outline-dark" type="submit" value="Создать">
+  <h2 class="center">Регистрация</h2>
+  <form method="post" class="registration-form">
+      {% csrf_token %}
+      <div class="form-group">
+          <label for="{{ form.username.id_for_label }}" style="margin-right: 40px;">Имя пользователя:</label>
+          {{ form.username }}
+      </div>
+      <div class="form-group">
+          <label for="{{ form.password1.id_for_label }}" style="margin-right: 125px;">Пароль:</label>
+          {{ form.password1 }}
+      </div>
+      <div class="form-group">
+          <label for="{{ form.password2.id_for_label }}">Подтверждение пароля:</label>
+          {{ form.password2 }}
+      </div>
+    <input class="btn btn-outline-dark form-group" type="submit" value="Создать">
   </form>  
 {% endblock content %}

@@ -19,10 +19,6 @@ h2 {
   color: #d8c3ce;
 }
 
-.ah2 {
-  margin-left: 15px;
-}
-
 .notes {
   position: absolute;
 }
@@ -97,4 +93,17 @@ textarea {
 
 .overdue {
   color: rgba(255, 0, 0, 0.9);
+}
+
+.form-group {
+  margin: 5px 5px 10px 10px
+}
+
+.registration-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
