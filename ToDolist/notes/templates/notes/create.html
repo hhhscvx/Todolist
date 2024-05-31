@@ -3,9 +3,9 @@
 {% block title %}Добавить заметку{% endblock title %}
 
 {% block content %}
-  <h2 class="ah2">Добавить заметку</h2>
-  <p style="margin-left: 10px">Заполните форму для добавления заметки</p>
-  <form method="post" style="margin-left: 10px">
+  <h2 class="marginleft">Добавить заметку</h2>
+  <p class="marginleft">Заполните форму для добавления заметки</p>
+  <form method="post" class="marginleft">
     {{ note.as_p }}
     {% csrf_token %}
     <input class="btn btn-outline-dark" type="submit" value="Добавить">
