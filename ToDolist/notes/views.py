@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Note
-from .forms import NoteForm
+from .forms import NoteForm, CustomUserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -95,7 +95,7 @@ def note_create_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        reg = UserCreationForm(request.POST)
+        reg = CustomUserCreationForm(request.POST)
         if reg.is_valid():
             reg.save()
             cd = reg.cleaned_data
@@ -105,6 +105,6 @@ def register_view(request):
             login(request, user)
             return redirect('notes:list_view')
     else:
-        reg = UserCreationForm()
+        reg = CustomUserCreationForm()
     cache_delete(cache, settings)
     return render(request, 'registration/register.html', {'form': reg})

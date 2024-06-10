@@ -1,0 +1,19 @@
+upstream uwsgi_app {
+server unix:/todolist/ToDolist/uwsgi_app.sock;
+}
+
+server {
+    listen          80;
+    server_name     192.168.1.154;
+    error_log       stderr warn;
+    access_log      /dev/stdout main;
+
+    location / {
+        include     /etc/nginx/uwsgi_params;
+        uwsgi_pass  uwsgi_app;
+    }
+
+    location /static/ {
+        alias /todolist/ToDolist/static/;
+    }
+}

@@ -6,10 +6,6 @@ RUN apt-get update && apt-get install -y postgresql-client build-essential libpq
 
 RUN pip install -r /temp/requirements.txt
 
-RUN adduser --disabled-password todolist-user
-
-COPY ToDolist /todolist
+COPY . /todolist
 WORKDIR /todolist
 EXPOSE 8000
-
-USER todolist-user

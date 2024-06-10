@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-from datetime import timedelta
 from pathlib import Path
 import os
 
@@ -27,7 +26,7 @@ SECRET_KEY = 'django-insecure-c_+a*#kt=(*!gbr#=5p_xw&ywz(a%5x(=s@9==^c1#ku*@@@t2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.154', 'localhost']
 
 
 # Application definition
@@ -42,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
     'debug_toolbar',
 ]
 
@@ -134,7 +132,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'notes', 'static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
