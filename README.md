@@ -1,3 +1,5 @@
+## About project
+My first simple django project that makes it easier to work with notes and todos
 ## About the implemented technologies in my project:
 1. Backend on Django & Frontend on JavaScript
 2. REST API by Django Rest Framework
