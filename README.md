@@ -1,19 +1,26 @@
-## About project
-My first simple django project that makes it easier to work with notes and todos
-## About the implemented technologies in my project:
-1. Backend on Django & Frontend on JavaScript
-2. REST API by Django Rest Framework
-3. PostgreSQL DB
-4. Caching via Redis
-5. Buisness-logic in services
-6. Wrapped in Docker
-7. Deployed on Linux server via Nginx & Uwsgi
+## О проекте
+Мой первый небольшой пет-проект на django, который упрощает работу с заметками и задачами
 
-## To launch:
+## В проекте реализованы
+- Регистрацию и авторизацию
+- Создание заметок/задач
+- Редактирование названия, даты и описания заметок
+- Удаление заметок
+- Все реализовано с удобными всплывающими окнами через JavaScript
+
+## Технологии, использованные в проекте
+1. Бэкенд на Django и Фронтенд на JavaScript
+2. REST API на Django Rest Framework
+3. База данных PostgreSQL
+4. Кеширование Redis
+5. Контейнеризация с Docker
+6. Развернут на Linux-сервере используя Nginx & Uwsgi
+
+## Запуск
 1. `docker-compose build`
 2. `docker-compose up`
 
-## Functional images:
+## Изображения функционала
 
 ![image](https://github.com/hhhscvx/Todolist/assets/149922938/d784e769-54ea-4977-bd8c-f5165c183c0f)
 ![image](https://github.com/hhhscvx/Todolist/assets/149922938/e3d26ea2-fbb7-4ed8-ad8c-1cc47f5091f6)
